@@ -1,0 +1,58 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-family: "Concert One", cursive;
+  font-size: 4.375rem;
+  text-align: center;
+}
+
+.input-field {
+  width: 441px;
+  background-color: #eeeeee;
+  color: #a4a4a4;
+  text-align: center;
+}
+
+.primary-btn,
+.input-field,
+.chore-rendering-container {
+  font-family: "Inter", sans-serif;
+  height: 94px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.875rem;
+}
+
+.primary-btn {
+  margin-left: 0.25em;
+}
+
+.add-btn {
+  width: 87px;
+  background-color: #ffcc68;
+}
+
+.del-btn {
+  width: 82px;
+  background-color: #ff9548;
+}
+
+.chore-rendering-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 638px;
+  height: 92px;
+  background-color: #fbdf7c;
+  margin-top: 0.5em;
+}
