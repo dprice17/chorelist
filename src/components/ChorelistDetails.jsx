@@ -11,7 +11,7 @@ export default function ChorelistDetails() {
     handleDelSelectedChore,
   } = React.useContext(ChorelistContext);
 
-q
+
   return (
     <div>
       <h1>Chorelist</h1>
