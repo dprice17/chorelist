@@ -19,22 +19,29 @@ h1 {
 .input-field {
   width: 441px;
   background-color: #eeeeee;
-  color: #a4a4a4;
   text-align: center;
+  transition: border 0.2s ease;
+}
+
+.input-field:hover {
+  border: 5px solid #000000;
+  cursor: pointer;
 }
 
 .primary-btn,
 .input-field,
-.chore-rendering-container {
+.chore-rendering-btn {
   font-family: "Inter", sans-serif;
   height: 94px;
   border: none;
   border-radius: 10px;
   font-size: 1.875rem;
+  color: #000000;
 }
 
 .primary-btn {
   margin-left: 0.25em;
+  transition: transform 0.2s ease-in-out;
 }
 
 .add-btn {
@@ -42,12 +49,18 @@ h1 {
   background-color: #ffcc68;
 }
 
+.primary-btn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 .del-btn {
   width: 82px;
   background-color: #ff9548;
 }
 
-.chore-rendering-container {
+.chore-rendering-btn {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,4 +68,27 @@ h1 {
   height: 92px;
   background-color: #fbdf7c;
   margin-top: 0.5em;
+  font-size: 2rem;
+  transition: background-color 0.2s;
+}
+
+.chore-rendering-btn:hover {
+  background-color: #ff9548;
+  cursor: pointer;
+}
+
+.chore-rendering-btn:hover .delete-icon {
+  display: inline;
+  position: absolute;
+  top: 5px;
+  right: 4px;
+  cursor: pointer;
+}
+
+.delete-icon {
+  display: none;
+}
+
+.add-chores-notification {
+  font-size: 1.5rem;
 }

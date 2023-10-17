@@ -51,6 +51,7 @@ export default function Chorelist({ children }) {
     setUserInput("");
   };
 
+
   const handleDelButtonClick = (choreIds) => {
     const rootRef = ref(database);
     const choresInDBRef = child(rootRef, "chorelist");
@@ -59,8 +60,8 @@ export default function Chorelist({ children }) {
 
   const handleDelSelectedChore = (key) => {
     const rootRef = ref(database);
-    const selectedChore = child(rootRef, "chorelist/" + key);
-    remove(selectedChore);
+      const selectedChore = child(rootRef, "chorelist/" + key);
+      remove(selectedChore);
   };
 
 

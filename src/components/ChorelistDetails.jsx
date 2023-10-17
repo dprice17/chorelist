@@ -33,16 +33,20 @@ export default function ChorelistDetails() {
         </button>
 
         <div>
-          {Object.entries(choreData).map(([key, chore]) => (
-            <button
-              className="chore-rendering-container"
-              key={key}
-              onClick={() => handleDelSelectedChore(key)}
-            >
-              {chore}
-            </button>
-          ))}
+          {Object.entries(choreData).map(([key, chore]) =>
+                <button
+                  className="chore-rendering-btn"
+                  key={key}
+                  onClick={() => handleDelSelectedChore(key)}
+              >   
+                  {chore}
+                  <span className="delete-icon">X</span>
+                </button>
+            ) 
+          }
+          {choreData.length === 0 && <p className="add-chores-notification">Add chores to your list</p>}
         </div>
+
       </div>
     </div>
   );
