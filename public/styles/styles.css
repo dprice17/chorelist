@@ -1,0 +1,164 @@
+/********************* Global Styles *********************/
+
+/* Basic styling for the body element */
+body {
+  margin: 0 auto;
+  color: #ffffff;
+  min-width: 400px;
+  height: 100vh;
+  background-color: #7695ff;
+  font-family: "Roboto", sans-serif;
+  padding: 0 20px;
+}
+
+/********************* Container Styles *********************/
+
+/* Main container for centering content vertically and horizontally */
+.container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/********************* Typography Styles *********************/
+
+/* Main heading (h1) styling */
+h1 {
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+}
+
+/* Subtext styling below the main title */
+.title-subtext {
+  margin-top: 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Styling for a paragraph when no items are present */
+.no-items-para-element {
+  margin-top: 2em;
+}
+
+/********************* Add Chore Container Styles *********************/
+
+/* Container for the entire chore list form */
+.add-chore-container {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 0.5em;
+}
+
+/********************* Input Field Styles *********************/
+
+/* Styling for the input field in the form */
+.chore-input-field {
+  border-radius: 5px;
+  border: none;
+  height: 35px;
+  width: 250px;
+  padding: 0 15px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Input field focus state */
+.chore-input-field:focus {
+  outline: none;
+  box-shadow: 0 0 5px #ff9874;
+}
+
+/********************* List Container Styles *********************/
+
+/* Container for the list of chores */
+.chore-list-container {
+  margin-top: 2em;
+  background-color: #ffffff;
+  border: 2px solid #ccc;
+  width: 320px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1em;
+}
+
+/* List styling for the chore items */
+.chore-list {
+  list-style-type: none;
+  padding-left: 0;
+  color: #000000;
+}
+
+/* Individual chore item spacing */
+.chore {
+  margin-bottom: 1em;
+}
+
+/* Container for each chore item in the list */
+.chore-item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+}
+
+/********************* Button Styles *********************/
+
+/* General button styling */
+button {
+  border-radius: 5px;
+  border: none;
+  height: 35px;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0 15px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover and focus state for buttons */
+button:hover,
+button:focus {
+  opacity: 0.8;
+}
+
+/* Container for chore item buttons */
+.chore-item-btn-container {
+  display: flex;
+  align-items: center;
+}
+
+/********************* Specific Button Styles *********************/
+
+/* Edit input field for chores */
+.edit-chore-input {
+  width: 125px;
+  height: 25px;
+}
+
+/* Delete button styling */
+.delete-btn {
+  background-color: #ff4d4d;
+}
+
+/* General styling for submit, edit, and save buttons */
+.edit-btn,
+.add-btn,
+.save-btn {
+  background-color: #ff9874;
+}
+
+/* Margin adjustment for edit and save buttons */
+.edit-btn,
+.save-btn {
+  margin-right: 1em;
+}
