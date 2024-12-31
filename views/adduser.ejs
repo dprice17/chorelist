@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Metadata and title -->
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>ChoreOrganizer</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <main>
+      <div class="container">
+        <!-- Header Section -->
+        <header class="header-container">
+          <h1>ChoreOrganizer</h1>
+          <p>Wipe your chores out</p>
+        </header>
+
+        <!-- Error Message Section -->
+        <!-- Dynamically displays an error message if 'locals.error' exists -->
+        <p class="error-msg" id="error-msg" style="display: none">
+          <%= locals.error %>
+        </p>
+        <% if (locals.error) { %>
+        <script>
+          // Show error message temporarily, then hide it after 4 seconds
+          document.getElementById("error-msg").style.display = "block";
+          setTimeout(() => {
+            document.getElementById("error-msg").style.display = "none";
+          }, 4000);
+        </script>
+        <% } %>
+        <!-- End of Error Message Section -->
+
+        <!-- Add New User Input Section -->
+        <div class="add-chore-container">
+          <!-- Label for input field -->
+          <label for="name-input-field">Enter name to add to user list</label>
+
+          <!-- Form to submit new user input -->
+          <form
+            action="/adduser"
+            method="POST"
+            id="add-user-form"
+            class="add-user-input-field-container"
+          >
+            <!-- Input field for entering user name -->
+            <input
+              type="text"
+              class="chore-input-field"
+              id="name-input-field"
+              placeholder="Enter your name"
+              name="user"
+              required
+            />
+
+            <!-- Add button for submitting the form -->
+            <i class="fa-solid fa-plus add-btn" id="add-user-btn"></i>
+          </form>
+        </div>
+        <!-- End of Add New User Input Section -->
+      </div>
+    </main>
+
+    <!-- jQuery Library -->
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    ></script>
+
+    <!-- Custom Script -->
+    <script type="module" src="/choreManager.js"></script>
+  </body>
+</html>

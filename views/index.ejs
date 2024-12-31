@@ -1,41 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Metadata for character encoding and viewport settings -->
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>Chorelist</title>
+    <title>ChoreOrganizer</title>
+
+    <!-- External stylesheet links for page styling -->
     <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
 
   <body>
-    <div class="container">
-      <h1>My Chorelist</h1>
-      <p class="title-subtext">Get Stuff Done</p>
+    <main>
+      <div class="container">
+        <!-- Header section with title and tagline -->
+        <header class="header-container">
+          <h1>ChoreOrganizer</h1>
+          <p>Wipe your chores out</p>
+        </header>
 
-      <!-- Container for the add chore form -->
-      <div class="add-chore-container">
-        <form action="/submit" method="POST">
-          <input
-            type="text"
-            class="chore-input-field"
-            placeholder="Enter a chore (e.g., Do laundry)"
-            name="chore"
-            required
-          />
-          <button type="submit" class="add-btn">Add</button>
-        </form>
+        <!-- Sign-in form to select a user account -->
+        <div class="select-user-form-container">
+          <form
+            action="/selectuser"
+            method="POST"
+            class="select-user-form"
+            name="select-user-form"
+            id="select-user-form"
+            onsubmit="return this.options.value !== '';"
+          >
+            <!-- Label for the select dropdown -->
+            <label for="account-select">Select an account:</label>
+            <select
+              name="options"
+              id="account-select"
+              onchange="if(this.value) this.form.submit()"
+            >
+              <option value="0">Select account</option>
+              <!-- Loop through available users and display them in the dropdown -->
+              <% if(locals.users){%> 
+              <% users.forEach(user => { %>
+                <option value="<%=user.id%>" <%= locals.selectedUser === user.id ? "selected" : ""%>><%=user.name%></option>
+              <% }) %> 
+              <%}%>
+              <!-- Option to add a new family member -->
+              <option value="add">Add family member</option>
+            </select>
+          </form>
+        </div>
 
-        <!-- Conditional rendering: checks if there are chores in the data -->
-        <% if (Array.isArray(locals.choreData) && locals.choreData.length > 0) {
-        %>
+        <!-- Add chore input field, hidden if an account has been selected -->
+        <div class="add-chore-container" id="add-chore-container" style="<%= locals.isSelectAccountClicked ? 'display: none;' : 'display: flex;' %>">
+          <!-- Form to submit a new chore -->
+          <form
+            action="/submit"
+            method="POST"
+            class="chore-input-field-container"
+            id="chore-form"
+          >
+            <input
+              type="text"
+              class="chore-input-field"
+              id="chore-input-field"
+              placeholder="Enter a chore (e.g., Do laundry)"
+              name="chore"
+              required
+            />
+            
+            <!-- Button to submit the chore -->
+            <i class="fa-solid fa-plus add-btn" id="add-btn"></i>
+          </form>
+        </div>
+        <!-- End of Add Chore Input Field -->
 
-        <!-- Container for displaying the list of chores -->
+        <!-- Conditional rendering for displaying chores -->
+        <% if (Array.isArray(locals.choreData) && locals.choreData.length > 0)
+        { %>
+        
+        <!-- Error message display, hides after 4 seconds -->
+        <p class="error-msg" id="error-msg" style="display: none">
+          <%= locals.error %>
+        </p>
+        <% if(locals.error){ %>
+        <script>
+          document.getElementById("error-msg").style.display = "block";
+          setTimeout(() => {
+            document.getElementById("error-msg").style.display = "none";
+          }, 4000);
+        </script>
+        <% } %>
+        <!-- End of error message -->
+
+        <!-- Chore list container -->
         <div class="chore-list-container">
           <ul class="chore-list">
-            <!-- Loop through the list of chores and display each one -->
+            <!-- Loop through the chores and display each one -->
             <% locals.choreData.forEach(chore => { %>
             <li class="chore">
               <div class="chore-item-container">
@@ -57,29 +120,27 @@
                   id="edit-chore-input-<%=chore.id%>"
                   class="edit-chore-input"
                   data-id="<%=chore.id%>"
+                  placeholder="Enter a chore"
+                  required
                 />
 
-                <!-- Container for edit, save, and delete buttons -->
+                <!-- Buttons for editing, saving, and deleting the chore -->
                 <div class="chore-item-btn-container">
-                  <!-- Button to trigger edit functionality -->
-                  <button
-                    type="submit"
-                    class="edit-btn"
-                    id="edit-btn-<%=chore.id%>"
+                  <!-- Edit button to allow for changes -->
+                  <i 
+                    class="fa-solid fa-pen-to-square edit-btn" 
+                    id="edit-btn-<%=chore.id%>" 
                     data-id="<%=chore.id%>"
                   >
-                    Edit
-                  </button>
+                  </i>
 
-                  <!-- Form for saving the edited chore -->
+                  <!-- Save button, only visible during editing -->
                   <form action="/save" method="POST">
-                    <!-- Hidden field to store the chore ID -->
                     <input
                       type="hidden"
                       value="<%= Object.values(chore)[0] %>"
                       name="id"
                     />
-                    <!-- Hidden input field for submitting the updated/editted chore -->
                     <input
                       type="hidden"
                       name="updatedChore"
@@ -87,27 +148,28 @@
                       id="hidden-chore-<%=chore.id %>"
                       data-id="<%=chore.id%>"
                     />
-                    <!-- Save button, initially hidden, displayed when editing -->
-                    <button
-                      id="save-btn-<%= chore.id %>"
-                      class="save-btn"
-                      style="display: none"
+                    <i 
+                      class="fa-solid fa-floppy-disk save-btn" 
+                      id="save-btn-<%= chore.id %>" 
                       data-id="<%= chore.id %>"
+                      style="display: none;"
                     >
-                      Save
-                    </button>
+                    </i>
                   </form>
 
-                  <!-- Form for deleting the chore -->
-                  <form action="/delete" method="POST" style="display: inline">
-                    <!-- Hidden field to store the chore ID for deletion -->
+                  <!-- Delete button to remove the chore -->
+                  <form
+                    action="/delete"
+                    method="POST"
+                    style="display: inline"
+                  >
                     <input
                       type="hidden"
                       value="<%= Object.values(chore)[0] %>"
                       name="id"
                     />
-                    <!-- Delete button to remove the chore -->
-                    <button type="submit" class="delete-btn">Delete</button>
+                    <i class="fa-solid fa-trash delete-btn" id="delete-btn-<%=chore.id%>" data-id="<%=chore.id%>">
+                    </i>
                   </form>
                 </div>
               </div>
@@ -117,11 +179,19 @@
         </div>
 
         <% } else { %>
-        <p class="no-items-para-element">No items on your chore list yet...</p>
+        <p class="no-items-para-element">
+          No items on your chore list yet...
+        </p>
         <% } %>
+        <!-- End of Chore List Container -->
+
       </div>
-    </div>
+    </main>
+
+    <!-- External JavaScript libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script type="module" src="choreManager.js"></script>
+
+    <!-- Custom JavaScript functionality -->
+    <script type="module" src="/choreManager.js"></script>
   </body>
 </html>

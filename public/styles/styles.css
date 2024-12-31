@@ -1,57 +1,94 @@
 /********************* Global Styles *********************/
 
-/* Basic styling for the body element */
+/* Universal box-sizing for consistent layout behavior */
+* {
+  box-sizing: border-box;
+}
+
+/* Global body styling */
 body {
   margin: 0 auto;
   color: #ffffff;
-  min-width: 400px;
   height: 100vh;
   background-color: #7695ff;
   font-family: "Roboto", sans-serif;
   padding: 0 20px;
 }
 
-/********************* Container Styles *********************/
+/********************* Layout Styles *********************/
 
-/* Main container for centering content vertically and horizontally */
+/* Main layout container */
+main {
+  height: 100%;
+}
+
+/* Central container for aligning content */
 .container {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 400px;
   height: 100%;
 }
 
 /********************* Typography Styles *********************/
 
-/* Main heading (h1) styling */
-h1 {
-  font-size: 2.5rem;
-  letter-spacing: 1px;
-  margin-bottom: 0;
-}
-
-/* Subtext styling below the main title */
-.title-subtext {
-  margin-top: 0;
-  font-size: 1.1rem;
-  font-weight: 400;
-  line-height: 1.6;
-}
-
-/* Styling for a paragraph when no items are present */
+/* Paragraph styling for no-items message */
 .no-items-para-element {
   margin-top: 2em;
 }
 
-/********************* Add Chore Container Styles *********************/
+/* Header container styling */
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
-/* Container for the entire chore list form */
+/* Styling for header container paragraph */
+.header-container p {
+  margin-top: 5px;
+}
+
+/* Styling for main heading */
+h1 {
+  margin-bottom: 0;
+  color: #ff9874;
+}
+
+/********************* Form Styles *********************/
+
+/* Form container for user selection */
+.select-user-form-container {
+  width: 100%;
+}
+
+/* Dropdown styling */
+select {
+  margin-top: 5px;
+  border-radius: 5px;
+  border: none;
+  height: 35px;
+  width: 100%;
+  padding: 0 15px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Dropdown hover effect */
+select:hover {
+  outline: none;
+  box-shadow: 0 0 5px #ff9874;
+}
+
+/********************* Add Chore Section *********************/
+
+/* Container for chore input and list */
 .add-chore-container {
   margin-top: 1em;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -59,39 +96,51 @@ h1 {
   gap: 0.5em;
 }
 
-/********************* Input Field Styles *********************/
+/* Input field container for chore addition */
+.chore-input-field-container,
+.add-user-input-field-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 0.5em;
+}
 
-/* Styling for the input field in the form */
+/* Margin adjustment for user input field */
+.add-user-input-field-container {
+  margin-top: 0.5em;
+}
+
+/* Styling for input fields */
 .chore-input-field {
   border-radius: 5px;
   border: none;
   height: 35px;
-  width: 250px;
+  width: 100%;
   padding: 0 15px;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
 }
 
-/* Input field focus state */
-.chore-input-field:focus {
+/* Input field hover effect */
+.chore-input-field:hover {
   outline: none;
   box-shadow: 0 0 5px #ff9874;
 }
 
-/********************* List Container Styles *********************/
+/********************* List Styles *********************/
 
-/* Container for the list of chores */
+/* Container for displaying chore list */
 .chore-list-container {
-  margin-top: 2em;
+  margin-top: 1em;
   background-color: #ffffff;
   border: 2px solid #ccc;
-  width: 320px;
+  width: 100%;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 1em;
 }
 
-/* List styling for the chore items */
+/* Styling for unordered chore list */
 .chore-list {
   list-style-type: none;
   padding-left: 0;
@@ -103,12 +152,29 @@ h1 {
   margin-bottom: 1em;
 }
 
-/* Container for each chore item in the list */
+/* Container for individual chore items */
 .chore-item-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5em;
+}
+
+/* Edit input field styling */
+.edit-chore-input {
+  width: 125px;
+  border-radius: 5px;
+  height: 35px;
+  padding: 0 15px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Edit input field focus effect */
+.edit-chore-input:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 5px #ff9874;
 }
 
 /********************* Button Styles *********************/
@@ -125,13 +191,13 @@ button {
   transition: background-color 0.3s ease;
 }
 
-/* Hover and focus state for buttons */
+/* Button hover and focus effect */
 button:hover,
 button:focus {
   opacity: 0.8;
 }
 
-/* Container for chore item buttons */
+/* Button container for chore items */
 .chore-item-btn-container {
   display: flex;
   align-items: center;
@@ -139,22 +205,44 @@ button:focus {
 
 /********************* Specific Button Styles *********************/
 
-/* Edit input field for chores */
-.edit-chore-input {
-  width: 125px;
-  height: 25px;
-}
-
 /* Delete button styling */
 .delete-btn {
-  background-color: #ff4d4d;
+  color: red;
 }
 
-/* General styling for submit, edit, and save buttons */
+/* Specific button types (edit, save, add) */
 .edit-btn,
-.add-btn,
-.save-btn {
-  background-color: #ff9874;
+.save-btn,
+.delete-btn {
+  font-size: 22px;
+}
+
+.edit-btn:hover,
+.save-btn:hover,
+.delete-btn:hover {
+  font-size: 25px;
+}
+
+.edit-btn,
+.save-btn,
+.add-btn {
+  color: #ff9874;
+}
+
+.edit-btn:hover,
+.save-btn:hover,
+.add-btn:hover,
+.delete-btn:hover {
+  cursor: pointer;
+}
+
+/* Add button styling */
+.add-btn {
+  font-size: 35px;
+}
+
+.add-btn:hover {
+  color: #ffffff;
 }
 
 /* Margin adjustment for edit and save buttons */
@@ -162,3 +250,4 @@ button:focus {
 .save-btn {
   margin-right: 1em;
 }
+
